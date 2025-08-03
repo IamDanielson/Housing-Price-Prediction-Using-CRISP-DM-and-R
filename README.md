@@ -1,127 +1,138 @@
-# Housing-Price-Prediction-Using-CRISP-DM-and-R
-This project utilizes the CRISP-DM framework to analyze a structured housing dataset and forecast residential property prices. Implemented in R, it involves building and evaluating various regression models to identify optimal approaches for predicting property sale values and uncovering investment potential.
 
- # CRISP-DM Phases
-# 1. Business Understanding
-Goal: Maximize investment returns by predicting house sale prices and identifying properties likely to appreciate in value.
+# 🏡 Housing Price Prediction Using CRISP-DM and R
 
-# Success Indicators:
+This project applies the **CRISP-DM** framework to a structured housing dataset to forecast residential property prices and uncover investment opportunities. Implemented in **R**, it features the development and evaluation of multiple regression models to determine the most accurate approach for predicting property sale values.
 
-High-accuracy price predictions (low MAE)
+---
 
-Identification of high-potential investment opportunities
+## 📈 CRISP-DM Phases
 
-Understanding seasonal trends for better marketing timing
+### 1. Business Understanding
 
-# 2. Data Understanding
-The dataset includes property listings within a common geographical zone.
+**Objective:**
+Maximize investment returns by predicting house sale prices and identifying properties likely to appreciate in value.
 
-# Key features:
+**Success Criteria:**
 
-Proximity to points of interest (e.g., ocean and city center)
+* Accurate price predictions (low MAE)
+* Identification of high-potential investment opportunities
+* Insights into seasonal sales patterns to guide marketing strategies
 
-Property size, structural quality, and month of sale
+---
 
-Clean dataset with no missing/null values
+### 2. Data Understanding
 
-# Findings:
+The dataset includes property listings within a specific region.
 
-June has the highest transaction volume, showing seasonal influence on demand
+**Key Features:**
 
-# 3. Data Preparation & Feature Engineering
-Removed duplicate entries (using PARCELNO)
+* Proximity to ocean and city centers
+* Property size, structural quality, and sale month
+* No missing or null values
 
-Dropped irrelevant columns like LATITUDE, LONGITUDE, and demographic indicators
+**Findings:**
 
-Created new features with strong correlation to sale prices
+* June sees the highest transaction volume, indicating seasonal demand trends
 
-Applied a correlation threshold (≥ 0.3) to retain impactful variables
+---
 
-# 4. Modelling
-Developed eight predictive models with a 70/30 train-test split:
+### 3. Data Preparation & Feature Engineering
 
-Linear Regression
+* Removed duplicates using `PARCELNO`
+* Dropped irrelevant fields: `LATITUDE`, `LONGITUDE`, `avno60plus`
+* Engineered new features based on correlation with sale price
+* Applied correlation threshold (≥ 0.3) to retain impactful predictors
 
-Support Vector Regression (Linear & Polynomial)
+---
 
-Decision Tree
+### 4. Modelling
 
-Random Forest (100, 200, 500 trees)
+Eight regression models were developed using a **70/30 train-test split**:
 
-Gradient Boosting
+* Linear Regression
+* Support Vector Regression (Linear & Polynomial)
+* Decision Tree
+* Random Forest (100, 200, 500 trees)
+* Gradient Boosting
 
-# 📊 Evaluation Metric: Mean Absolute Error (MAE)
+**Evaluation Metric:**
+Mean Absolute Error (MAE)
 
-# Model	MAE Performance
-Linear Regression	Moderate
-SVR (Linear & Poly)	Moderate
-Decision Tree	Moderate
-Random Forest (100 Trees)	🔥 Best (Lowest MAE) ✅
-Gradient Boosting	Competitive
+| Model                         | Performance             |
+| ----------------------------- | ----------------------- |
+| Linear Regression             | Moderate                |
+| SVR (Linear & Polynomial)     | Moderate                |
+| Decision Tree                 | Moderate                |
+| **Random Forest (100 Trees)** | ✅ **Best (Lowest MAE)** |
+| Random Forest (200/500)       | Slightly higher         |
+| Gradient Boosting             | Competitive             |
 
-# 5. Model Tuning
-Tuned Random Forest using caret::train()
+---
 
-Parameters adjusted: mtry, min.node.size, splitrule = "variance"
+### 5. Model Tuning
 
-Used 5-fold Cross Validation to reduce overfitting
+* Tuned **Random Forest** using `caret::train()`
+* Parameters: `mtry`, `min.node.size`, `splitrule = "variance"`
+* Applied 5-fold cross-validation to reduce overfitting
+* Slight improvement in accuracy achieved
 
-Final model showed slight improvement in accuracy
+---
 
-# 6. Evaluation
-The tuned Random Forest model was tested on real data and accurately predicted a property's price (~1.35M)
+### 6. Evaluation
 
-It met both technical (MAE) and business (investment insight) expectations
+* Final model accurately predicted a test property’s price (\~\$1.35M)
+* Met both technical (low MAE) and business (ROI insights) objectives
 
-# 🚀 Deployment & Usability
-# 🧩 Deployment
-Save best model as best_model.rds
+---
 
-Deploy using Shiny or Azure ML Web Service
+## 🚀 Deployment & Usability
 
-Real-time prediction interface for property input
+### 🧩 Model Deployment
 
-# 🔄 Data Pipeline
-Connect to property listing databases or APIs
+* Saved as `best_model.rds`
+* Deployable via **Shiny** app or **Azure ML Web Service**
+* Accepts user input to provide real-time price prediction
 
-Automatically refresh with new listings and market changes
+### 🔄 Data Pipeline
 
-# 🖥️ Interface
-User-friendly UI for analysts, investors, and agents
+* Connects to property databases or APIs
+* Updates automatically with new listings and market trends
 
-Input fields: land size, build quality, sale month, proximity, etc.
+### 🖥️ User Interface
 
-# 📄 Documentation
-Includes technical documentation and user manual
+* Intuitive UI designed for analysts, investors, and real estate agents
+* Input fields: land size, build quality, sale month, proximity to city/ocean, etc.
 
-Guides on how to use and interpret model outputs
+### 📄 Documentation
 
-# 🔍 Key Takeaways
-Random Forest (100 trees) performed best
+* Includes technical documentation and user guide
+* Instructions for usage and model interpretation
 
-Top predictors: Land Area, Living Space, and Build Quality
+---
 
-June is peak sale month; January is lowest
+## 🔍 Key Insights
 
-Proximity to city or ocean impacts value
+* **Best Model:** Random Forest (100 Trees)
+* **Top Predictors:** Land Area, Living Space, Build Quality
+* **Sales Trends:** June peaks, January lowest
+* **Location Impact:** Proximity to ocean/city strongly influences price
+* The model generalizes well and is deployment-ready
 
-The model generalizes well and is ready for real-world use
+---
 
-# 🛠️ Tools Used
-Language: R
+## 🛠️ Tools & Technologies
 
-Libraries: tidyverse, ggplot2, caret, randomForest, e1071, gbm, rpart
+* **Language:** R
+* **Libraries:** `tidyverse`, `ggplot2`, `caret`, `randomForest`, `e1071`, `gbm`, `rpart`
+* **Framework:** CRISP-DM
+* **Deployment Tools:** Shiny, Azure ML
 
-Framework: CRISP-DM
+---
 
-Deployment Tools: Shiny, Azure ML
+## 🔮 Future Enhancements
 
-# 🔮 Future Enhancements
-Expand to larger or multi-regional datasets
-
-Integrate geospatial modeling (e.g., spatial interpolation)
-
-Automate tuning using Bayesian optimization
-
-Enhance UI for wider stakeholder access
+* Extend to multi-regional or larger datasets
+* Integrate geospatial modeling (e.g., spatial interpolation)
+* Use automated hyperparameter tuning (e.g., Bayesian Optimization)
+* Enhance user interface for broader stakeholder adoption
 
